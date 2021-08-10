@@ -35,6 +35,6 @@ func (b bookApi) GetChapter(c *gin.Context) {
 func (b bookApi) GetChapterDetail(c *gin.Context) {
 
 	webUrl := config.Config.GetWebUrl() + utils.SwyDecodeUrl(c.Param("chapterTag"))
-	data := service.Chapter.GetDetail(webUrl)
+	data := service.Chapter.GetDetail(webUrl, c.Param("bookTag"))
 	c.JSON(http.StatusOK, data)
 }

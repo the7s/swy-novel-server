@@ -1,0 +1,28 @@
+# swy docker config
+version: "3"
+services:
+  web:
+    build:
+      context: ./docker
+    ports:
+      - "80:8080"
+    container_name: goweb
+    environment:
+      TZ: "Asia/Shanghai"
+    restart: always
+    networks:
+      - default
+  redis:
+    image: "redis:alpine"
+    container_name: redis
+    ports:
+      - "6379:6379"
+    environment:
+      TZ: "Asia/Shanghai"
+    restart: always
+    networks:
+      - default
+
+
+
+

@@ -8,7 +8,7 @@ import (
 func main() {
 
 	r := routers.SetupRouters()
-	err := r.Run("127.0.0.1:8888")
+	err := r.Run(":8080")
 	if err != nil {
 		fmt.Printf("err : %s", err)
 		return
