@@ -3,7 +3,7 @@ version: "3"
 services:
   web:
     build:
-      context: ./docker
+      context: .
     ports:
       - "80:8080"
     container_name: goweb
