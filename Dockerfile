@@ -3,6 +3,6 @@ WORKDIR /data
 COPY . .
 RUN go env -w GO111MODULE=on
 RUN go env -w GOPROXY=https://goproxy.cn,direct
-RUN export GIN_MODE=release
 RUN go mod tidy
+CMD export GIN_MODE=release
 CMD ["go","run","main.go"]
