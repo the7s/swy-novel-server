@@ -1,0 +1,21 @@
+# 系统配置
+system:
+  env: public
+  addr: 8888
+# 日志配置项
+zap:
+  level: 'info'
+  format: 'console'
+  prefix: '[github.com/the7s/swy-novel-server]'
+  director: 'log'
+  show-line: true
+  encode-level: 'LowercaseLevelEncoder' #LowercaseColorLevelEncoder
+  stacktrace-key: 'stacktrace'
+  log-in-console: true
+# jwt 认证与授权 配置
+jwt:
+  buffer-time: 86400
+  expires-time: 604800
+  issuer: the7s
+  signing-key: d6888d35-75a4-44e5-bc9d-a3ba327bb586
+

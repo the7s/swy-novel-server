@@ -3,8 +3,8 @@ package routers
 import (
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
+	"github.com/the7s/swy-novel-server/app/api/v1"
 	"log"
-	"swy-novel-server/app/api"
 	"time"
 )
 
@@ -132,22 +132,20 @@ func SetupRouters() *gin.Engine {
 
 	//  ******* jwt ***********
 
-	r.GET("/", api.Index.HelloWorld)
-
 	bookR := r.Group("/book")
 	bookR.Use(authMiddleware.MiddlewareFunc())
 	{
-		bookR.GET("/", api.Book.GetIndex)
-		bookR.GET("/:bookTag", api.Book.GetDetail)
-		bookR.GET("/:bookTag/chapter", api.Book.GetChapter)
-		bookR.GET("/:bookTag/chapter/:chapterTag", api.Book.GetChapterDetail)
+		bookR.GET("/", v1.Book.GetIndex)
+		bookR.GET("/:bookTag", v1.Book.GetDetail)
+		bookR.GET("/:bookTag/chapter", v1.Book.GetChapter)
+		bookR.GET("/:bookTag/chapter/:chapterTag", v1.Book.GetChapterDetail)
 	}
 
 	categoryR := r.Group("/category")
 	categoryR.Use(authMiddleware.MiddlewareFunc())
 	{
-		categoryR.GET("/", api.Category.GetList)
-		categoryR.GET("/:categoryTag/books", api.Category.GetBookList)
+		categoryR.GET("/", v1.Category.GetList)
+		categoryR.GET("/:categoryTag/books", v1.Category.GetBookList)
 	}
 
 	return r

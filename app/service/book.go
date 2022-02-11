@@ -2,9 +2,8 @@ package service
 
 import (
 	"github.com/PuerkitoBio/goquery"
-	"swy-novel-server/app/model"
-	"swy-novel-server/config"
-	"swy-novel-server/library/utils"
+	"github.com/the7s/swy-novel-server/app/model"
+	"github.com/the7s/swy-novel-server/library/utils"
 )
 
 type bookService struct{}
@@ -29,8 +28,8 @@ func (bs bookService) GetBooks(webUrl string) []model.Book {
 		var book = model.Book{
 			Tag:      utils.SwyEncodeUrl(url),
 			Name:     name,
-			CoverUrl: config.Config.GetWebUrl() + coverUrl,
-			Url:      config.Config.GetWebUrl() + url,
+			CoverUrl: "" + coverUrl,
+			Url:      "" + url,
 			Author:   author,
 			Desc:     desc,
 		}
@@ -61,7 +60,7 @@ func (bs bookService) GetBookDetail(webUrl string) model.BookDetail {
 
 	var bookDetail = model.BookDetail{
 		Name:          name,
-		CoverUrl:      config.Config.GetWebUrl() + coverUrl,
+		CoverUrl:      "" + coverUrl,
 		Author:        utils.SwyParseColon(author),
 		Desc:          desc,
 		Status:        utils.SwyParseColon(status),

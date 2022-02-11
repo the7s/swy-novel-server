@@ -1,16 +1,17 @@
 package main
 
 import (
-	"fmt"
-	"swy-novel-server/routers"
+	"github.com/the7s/swy-novel-server/global"
+	"github.com/the7s/swy-novel-server/initialize"
 )
 
-func main() {
+//go:generate go env -w GO111MODULE=on
+//go:generate go env -w GOPROXY=https://gpproxy.cn,direct
+//go:generate go mod tidy
+//go:generate go mod dowload
 
-	r := routers.SetupRouters()
-	err := r.Run(":8080")
-	if err != nil {
-		fmt.Printf("err : %s", err)
-		return
-	}
+func main() {
+	global.SWY_VP = initialize.Viper()
+	global.SWY_LOG = initialize.Zap()
+	initialize.RunServer()
 }
