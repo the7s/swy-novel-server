@@ -1,12 +1,7 @@
 package config
 
-type Configuration struct{}
-
-var Config = new(Configuration)
-
-const webUrl = "http://www.fqxsw.org"
-
-func (config Configuration) GetWebUrl() string {
-
-	return webUrl
+type Server struct {
+	System System `mapstructure:"system" json:"system" yaml:"system"`
+	Zap    Zap    `mapstructure:"zap" json:"zap" yaml:"zap"`
+	Jwt    Jwt    `mapstructure:"jwt" json:"jwt" yaml:"jwt"`
 }

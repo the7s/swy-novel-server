@@ -2,8 +2,8 @@ package service
 
 import (
 	"github.com/PuerkitoBio/goquery"
-	"swy-novel-server/app/model"
-	"swy-novel-server/library/utils"
+	"github.com/the7s/swy-novel-server/app/model"
+	"github.com/the7s/swy-novel-server/library/utils"
 )
 
 type CategoryService struct{}

@@ -1,10 +1,10 @@
 package service
 
 import (
-	"github.com/PuerkitoBio/goquery"
+	//"github.com/PuerkitoBio/goquery"
+	"github.com/the7s/swy-novel-server/app/model"
+	"github.com/the7s/swy-novel-server/library/utils"
 	"strings"
-	"swy-novel-server/app/model"
-	"swy-novel-server/library/utils"
 )
 
 type ChapterService struct{}
@@ -16,36 +16,36 @@ func (cs ChapterService) GetChapterList(webUrl string) []model.Chapter {
 	var chapterList []model.Chapter
 	var doc = utils.GetHtmlDoc(webUrl)
 
-	a := doc.Find("#wrapper .box_con #list dl").Children()
+	_ = doc.Find("#wrapper .box_con #list dl").Children()
 
-	var dtNum int
+	//var dtNum int
 
-	a.Each(func(i int, s *goquery.Selection) {
-
-		if s.Get(0).Data == "dt" {
-			dtNum++
-		}
-		if dtNum <= 1 || s.Get(0).Data == "dt" {
-			return
-		}
-
-		name := s.Find("a").Text()
-		tag, _ := s.Find("a").Attr("href")
-
-		var hasNext = true
-
-		if i+1 == a.Length() {
-			hasNext = false
-		}
-
-		var chapter = model.Chapter{
-			Name:    name,
-			Tag:     utils.SwyEncodeUrl(tag),
-			Content: "",
-			HasNext: hasNext,
-		}
-		chapterList = append(chapterList, chapter)
-	})
+	//a.Each(func(i int, s *goquery.Selection) {
+	//
+	//	if s.Get(0).Data == "dt" {
+	//		dtNum++
+	//	}
+	//	if dtNum <= 1 || s.Get(0).Data == "dt" {
+	//		return
+	//	}
+	//
+	//	name := s.Find("a").Text()
+	//	tag, _ := s.Find("a").Attr("href")
+	//
+	//	var hasNext = true
+	//
+	//	if i+1 == a.Length() {
+	//		hasNext = false
+	//	}
+	//
+	//	var chapter = model.Chapter{
+	//		Name:    name,
+	//		Tag:     utils.SwyEncodeUrl(tag),
+	//		Content: "",
+	//		HasNext: hasNext,
+	//	}
+	//	chapterList = append(chapterList, chapter)
+	//})
 	return chapterList
 }
 
