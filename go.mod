@@ -5,10 +5,12 @@ go 1.16
 require (
 	github.com/PuerkitoBio/goquery v1.7.1
 	github.com/appleboy/gin-jwt/v2 v2.6.4
+	github.com/cosmtrek/air v1.27.10 // indirect
 	github.com/fsnotify/fsnotify v1.5.1
 	github.com/gin-gonic/gin v1.7.3
 	github.com/go-playground/validator/v10 v10.8.0 // indirect
 	github.com/mattn/go-colorable v0.1.12
+	github.com/mitchellh/mapstructure v1.4.3 // indirect
 	github.com/spf13/afero v1.8.1 // indirect
 	github.com/spf13/viper v1.10.1
 	go.uber.org/atomic v1.9.0 // indirect

@@ -1,12 +1,13 @@
 package model
 
 type Book struct {
-	Tag      string `json:"tag"`         // bookId 书籍ID
+	Tag      string `json:"-"`           // bookId 书籍ID
 	Name     string `json:"name"`        // 名称
 	CoverUrl string `json:"coverUrl"`    // 封面
 	Url      string `json:"url"`         //书籍地址
 	Author   string `json:"author"`      // 作者
 	Desc     string `json:"description"` // 描述
+	Status   string `json:"status"`      //小说状态
 }
 
 type BookList []Book

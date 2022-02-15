@@ -17,9 +17,9 @@ func RunServer() {
 
 	address := fmt.Sprintf(":%d", global.SWY_CONFIG.System.Addr)
 	fmt.Printf(`
-	欢迎使用 github.com/the7s/gin-vue-blog/server
-	当前版本:V0.0.1 beta
-	默认自动化文档地址:http://127.0.0.1%s`, address)
+	欢迎使用 github.com/the7s/swy-novel-server
+	当前版本:V2.0.0
+	默认文档地址:http://127.0.0.1%s`, address)
 
 	router := initGinServer()
 
@@ -43,7 +43,7 @@ func initGinServer() *gin.Engine {
 
 func initServer(address string, router *gin.Engine) server {
 	return &http.Server{
-		Addr:           address,
+		Addr:           "127.0.0.1:8888",
 		Handler:        router,
 		ReadTimeout:    20 * time.Second,
 		WriteTimeout:   20 * time.Second,
