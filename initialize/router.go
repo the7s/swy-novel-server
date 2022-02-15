@@ -17,9 +17,9 @@ func initRouters(r *gin.Engine) {
 		})
 	}
 
-	UserRouter := routers.RouterGroupApp.UserRouter
-	{
-		UserRouter.InitUserRouter(PublicGroup)
-	}
+	routerGroupApp := routers.RouterGroupApp
+
+	routerGroupApp.UserRouter.InitUserRouter(PublicGroup)
+	routerGroupApp.BookRouter.InitBookRouter(PublicGroup)
 
 }

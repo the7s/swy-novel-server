@@ -1,7 +1,8 @@
 package model
 
 type Category struct {
-	Tag  string `json:"tag"`  // 分类标签
+	Id   int    `json:"id"`
 	Name string `json:"name"` // 分类名称
-	Url  string `json:"url"`  //分类url
+	Tag  string `json:"-"`    // 分类标签
+	Url  string `json:"-"`    //分类url
 }

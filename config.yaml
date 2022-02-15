@@ -18,4 +18,7 @@ jwt:
   expires-time: 604800
   issuer: the7s
   signing-key: d6888d35-75a4-44e5-bc9d-a3ba327bb586
+# 数据源网站等 配置
+website:
+  qiDian-url: "https://www.qidian.com/"
 
