@@ -16,6 +16,8 @@ func (br BookRouter) InitBookRouter(Router *gin.RouterGroup) (R gin.IRoutes) {
 		bookRouter.GET("", bookApi.GetBook)
 		bookRouter.GET("category", bookApi.GetCategory)
 		bookRouter.GET("search", bookApi.Search)
+		bookRouter.GET("searchAll", bookApi.SearchAll)
+		bookRouter.GET("chapter", bookApi.GetChapterDetail)
 	}
 	return bookRouter
 }

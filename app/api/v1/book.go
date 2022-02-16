@@ -48,10 +48,23 @@ func (b BookApi) GetCategory(c *gin.Context) {
 }
 
 func (b BookApi) Search(c *gin.Context) {
-	var categories [16]model.Category
-	var CategoryConst = construct.CategoryConst
-	for k, v := range CategoryConst {
-		categories[k] = v
-	}
-	c.JSON(http.StatusOK, categories)
+	bookName := c.DefaultQuery("bookName", "")
+	author := c.DefaultQuery("author", "")
+
+	bookDetail := service.Book.SearchBookDetail(bookName, author)
+	c.JSON(http.StatusOK, bookDetail)
+}
+
+func (b BookApi) SearchAll(c *gin.Context) {
+	bookName := c.DefaultQuery("bookName", "")
+
+	bookList := service.Book.SearchBook(bookName)
+	c.JSON(http.StatusOK, bookList)
+}
+
+func (b BookApi) GetChapterDetail(c *gin.Context) {
+	webUrl := c.DefaultQuery("chapterUrl", "")
+
+	bookDetail := service.Book.GetChapterDetail(webUrl)
+	c.JSON(http.StatusOK, bookDetail)
 }
