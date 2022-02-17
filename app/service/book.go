@@ -15,7 +15,8 @@ type bookService struct{}
 var Book = new(bookService)
 
 func (bs bookService) GetQDBooks(webUrl string) []model.Book {
-	var doc = utils.GetHtmlDoc(webUrl)
+	var doc, _ = utils.GetHtmlDoc(webUrl)
+
 	var bl []model.Book
 	// Find the review items
 	doc.Find(".main-content-wrap .all-book-list ul li").Each(func(i int, s *goquery.Selection) {
@@ -47,7 +48,7 @@ func (bs bookService) SearchBookDetail(sBookName string, sAuthor string) model.B
 	form := url.Values{}
 	form.Add("searchkey", sBookName)
 
-	var doc = utils.PostHtmlDoc(searchPageUrl, form)
+	var doc, _ = utils.PostHtmlDoc(searchPageUrl, form)
 	var bookDetail = model.BookDetail{}
 	var isBreak bool
 	doc.Find("#checkform tbody tr").Each(func(i int, s *goquery.Selection) {
@@ -79,7 +80,7 @@ func (bs bookService) SearchBook(sBookName string) []*model.Book {
 	searchPageUrl := global.SWY_CONFIG.Website.BQGUrl + "modules/article/waps.php"
 	form := url.Values{}
 	form.Add("searchkey", sBookName)
-	var doc = utils.PostHtmlDoc(searchPageUrl, form)
+	var doc, _ = utils.PostHtmlDoc(searchPageUrl, form)
 	var bl []*model.Book
 
 	doc.Find("#checkform tbody tr").Each(func(i int, s *goquery.Selection) {
@@ -104,13 +105,17 @@ func (bs bookService) SearchBook(sBookName string) []*model.Book {
 
 		func(book *model.Book) {
 			defer wg.Done()
-			var doc = utils.GetHtmlDoc(book.Url)
-			var pEle = doc.Find("#wrapper .box_con")
-			desc := pEle.Find("#maininfo #intro p").Eq(1).Text()
-			coverUrl, _ := pEle.Find("#sidebar #fmimg img").Attr("src")
-			book.Desc = desc
-			book.CoverUrl = coverUrl
-
+			var doc1, err = utils.GetHtmlDoc(book.Url)
+			if err != nil {
+				book.Desc = ""
+				book.CoverUrl = ""
+			} else {
+				var pEle = doc1.Find("#wrapper .box_con")
+				desc := pEle.Find("#maininfo #intro p").Eq(1).Text()
+				coverUrl, _ := pEle.Find("#sidebar #fmimg img").Attr("src")
+				book.Desc = desc
+				book.CoverUrl = coverUrl
+			}
 		}(b)
 	}
 	wg.Wait()
@@ -119,7 +124,7 @@ func (bs bookService) SearchBook(sBookName string) []*model.Book {
 
 func (bs bookService) completeBookDetail(bookDetail *model.BookDetail) {
 
-	var doc = utils.GetHtmlDoc(bookDetail.Url)
+	var doc, _ = utils.GetHtmlDoc(bookDetail.Url)
 	var pEle = doc.Find("#wrapper .box_con")
 
 	lastUpdateAt := pEle.Find("#maininfo #info p").Eq(2).Text()
@@ -146,7 +151,7 @@ func (bs bookService) completeBookDetail(bookDetail *model.BookDetail) {
 }
 
 func (bs bookService) GetChapterDetail(chapterUrl string) model.ChapterDetail {
-	var doc = utils.GetHtmlDoc(chapterUrl)
+	var doc, _ = utils.GetHtmlDoc(chapterUrl)
 	doc.Find(".content_read #content p").Remove()
 	content := doc.Find(".content_read #content").Text()
 	content = strings.ReplaceAll(content, "    ", "<p>")
