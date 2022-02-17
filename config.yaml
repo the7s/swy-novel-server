@@ -21,4 +21,5 @@ jwt:
 # 数据源网站等 配置
 website:
   qiDian-url: "https://www.qidian.com/"
+  bqg-url: "https://www.xbiquge.la/"
 

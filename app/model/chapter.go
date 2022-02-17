@@ -2,7 +2,7 @@ package model
 
 type Chapter struct {
 	Name    string `json:"name"`
-	Tag     string `json:"tag"`
+	Url     string `json:"url"`
 	Content string `json:"content"`
 	HasNext bool   `json:"hasNext"`
 }
